@@ -15,7 +15,7 @@ mongoose.connect(DB, {
     useCreateIndex: true,
     useFindAndModify: false
 }).then(() => {
-    console.log('DB connection successful');
+    // console.log('DB connection successful');
 });
 
 //PATHS
@@ -34,10 +34,10 @@ const importData = async () => {
         await Tour.create(tours);
         await User.create(users, { validateBeforeSave: false });
         await Review.create(reviews);
-        console.log('Data successfully loaded');
+        // console.log('Data successfully loaded');
         process.exit();
     } catch (err) {
-        console.log(err);
+        // console.log(err);
     };
 };
 
@@ -47,10 +47,10 @@ const deleteData = async () => {
         await Tour.deleteMany();
         await User.deleteMany();
         await Review.deleteMany();
-        console.log('Database has been emptied');
+        // console.log('Database has been emptied');
         process.exit();
     } catch (err) {
-        console.log(err);
+        // console.log(err);
     };
 };
 

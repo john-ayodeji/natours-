@@ -46,7 +46,7 @@ exports.createBookingCheckout = catchAsync( async (req, res, next) => {
 
     await Booking.create({tour, user, price})
 
-    res.redirect('http://127.0.0.1:3000/my-tours')
+    res.redirect('/my-tours')
 })
 
 exports.updateBooking = catchAsync( async (req, res, next) => {

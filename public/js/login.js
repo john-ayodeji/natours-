@@ -5,7 +5,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
     try{
         const res = await axios({
             method: 'POST',
-            url: 'http://127.0.0.1:3000/api/v1/users/signup',
+            url: '/api/v1/users/signup',
             data: {
                 name,
                 email,
@@ -29,7 +29,7 @@ export const forgotPassword = async (email) => {
     try{
     const res = await axios({
         method: 'POST',
-        url: 'http://127.0.0.1:3000/api/v1/users/forgotpassword',
+        url: '/api/v1/users/forgotpassword',
         data: {
             email
         }
@@ -49,11 +49,10 @@ export const forgotPassword = async (email) => {
 export const resetPassword = async (password, passwordConfirm) => {
     const tokenArr = window.location.pathname.split('/');
     const resetToken = tokenArr[tokenArr.length - 1];
-    console.log(resetToken)
     try {
         const res = await axios({
             method: 'PATCH',
-            url: `http://127.0.0.1:3000/api/v1/users/resetPassword/${resetToken}`,
+            url: `/api/v1/users/resetPassword/${resetToken}`,
             data: {
                 password,
                 passwordConfirm
@@ -75,7 +74,7 @@ export const login = async (email, password) => {
     try{
         const res = await axios({
             method: 'POST',
-            url: 'http://127.0.0.1:3000/api/v1/users/login',
+            url: '/api/v1/users/login',
             data: {
                 email,
                 password
@@ -98,7 +97,7 @@ export const logout = async () => {
     try {
         const res = await axios({
             method: 'GET',
-            url: 'http://127.0.0.1:3000/api/v1/users/logout'
+            url: '/api/v1/users/logout'
         });
 
         if(res.data.status === 'success') location.reload(true);

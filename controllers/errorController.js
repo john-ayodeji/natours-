@@ -11,7 +11,7 @@ const handleCastErrorDB = err => {
 
 const handleDuplicateFieldsDB = err => {
     const value =  err.keyValue.name;
-    console.log(value);
+    // console.log(value);
     const message = `Duplicate value ${value}, please input another value`
     return new AppError(message, 400);
 }

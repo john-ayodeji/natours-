@@ -169,7 +169,7 @@ tourSchema.pre(/^find/, function(next) { //the /^find/ means all the commands th
 
 tourSchema.post(/^find/, function(docs, next) {
     //console.log(docs);
-    console.log(`Query took ${Date.now() - this.start} milliseconds`)
+    // console.log(`Query took ${Date.now() - this.start} milliseconds`)
     next();
 })
 
