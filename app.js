@@ -9,6 +9,7 @@ const hpp = require('hpp');
 const viewRouter = require('./routes/viewRoutes');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -24,6 +25,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //MIDDLE WARE STACK
+//implement cors
+app.use(cors()); //for get and post (simpler request)
+app.options('*', corse()) //for patch, delete, put which goes through the options request before the actual request
 
 //set security http
 app.use(helmet())
@@ -39,31 +43,31 @@ app.use(helmet())
 //     }
 //   })
 // );
-if (process.env.NODE_ENV === 'development') {
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "https://js.stripe.com"],
-        frameSrc: ["'self'", "https://js.stripe.com"],
-        connectSrc: ["'self'", "https://api.stripe.com", "ws:"],
-        styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
-      }
-    })
-  );
-} else {
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "https://js.stripe.com"],
-        frameSrc: ["'self'", "https://js.stripe.com"],
-        connectSrc: ["'self'", "https://api.stripe.com"],
-        styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
-      }
-    })
-  );
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(
+//     helmet.contentSecurityPolicy({
+//       directives: {
+//         defaultSrc: ["'self'"],
+//         scriptSrc: ["'self'", "https://js.stripe.com"],
+//         frameSrc: ["'self'", "https://js.stripe.com"],
+//         connectSrc: ["'self'", "https://api.stripe.com", "ws:"],
+//         styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
+//       }
+//     })
+//   );
+// } else {
+//   app.use(
+//     helmet.contentSecurityPolicy({
+//       directives: {
+//         defaultSrc: ["'self'"],
+//         scriptSrc: ["'self'", "https://js.stripe.com"],
+//         frameSrc: ["'self'", "https://js.stripe.com"],
+//         connectSrc: ["'self'", "https://api.stripe.com"],
+//         styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
+//       }
+//     })
+//   );
+// }
 
 //development logging
 if(process.env.NODE_ENV === 'development') {
