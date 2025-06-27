@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //MIDDLE WARE STACK
 //implement cors
 app.use(cors()); //for get and post (simpler request)
-app.options('*', corse()) //for patch, delete, put which goes through the options request before the actual request
+app.options('*', cors()) //for patch, delete, put which goes through the options request before the actual request
 
 //set security http
 app.use(helmet())
