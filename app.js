@@ -43,31 +43,31 @@ app.use(helmet())
 //     }
 //   })
 // );
-// if (process.env.NODE_ENV === 'development') {
-//   app.use(
-//     helmet.contentSecurityPolicy({
-//       directives: {
-//         defaultSrc: ["'self'"],
-//         scriptSrc: ["'self'", "https://js.stripe.com"],
-//         frameSrc: ["'self'", "https://js.stripe.com"],
-//         connectSrc: ["'self'", "https://api.stripe.com", "ws:"],
-//         styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
-//       }
-//     })
-//   );
-// } else {
-//   app.use(
-//     helmet.contentSecurityPolicy({
-//       directives: {
-//         defaultSrc: ["'self'"],
-//         scriptSrc: ["'self'", "https://js.stripe.com"],
-//         frameSrc: ["'self'", "https://js.stripe.com"],
-//         connectSrc: ["'self'", "https://api.stripe.com"],
-//         styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
-//       }
-//     })
-//   );
-// }
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://js.stripe.com"],
+        frameSrc: ["'self'", "https://js.stripe.com"],
+        connectSrc: ["'self'", "https://api.stripe.com", "ws:"],
+        styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
+      }
+    })
+  );
+} else {
+  app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://js.stripe.com"],
+        frameSrc: ["'self'", "https://js.stripe.com"],
+        connectSrc: ["'self'", "https://api.stripe.com"],
+        styleSrc: ["'self'", "https://js.stripe.com", "'unsafe-inline'"]
+      }
+    })
+  );
+}
 
 //development logging
 if(process.env.NODE_ENV === 'development') {
