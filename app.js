@@ -10,6 +10,7 @@ const viewRouter = require('./routes/viewRoutes');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -17,6 +18,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoute');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -81,6 +83,12 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again in an hour'
 })
 app.use('/api', limiter);//limiter works for all routes that staerts with api
+
+app.post(
+  '/webhook-checkout', 
+  bodyParser.raw({type: 'application/json'}),
+  bookingController.webhookCheckout
+); //we have to call it before body-parser json bcs stripe needs string response not json
 
 //body-parser reading data into req.body
 app.use(express.json({ limit: '10kb' }));
